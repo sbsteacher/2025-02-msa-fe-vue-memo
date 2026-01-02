@@ -30,6 +30,5 @@ onMounted( () => state.memos = storageService.getItems() );
       </div>
     </router-link>
     <router-link to="/memos/add" class="add btn btn-primary">+ 추가하기</router-link>
-
   </div>
 </template>
