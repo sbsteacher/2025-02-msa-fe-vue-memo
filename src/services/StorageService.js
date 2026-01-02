@@ -6,6 +6,7 @@
 */
 //#: 은닉화, 캡슐화
 export class StorageService {
+    //전역 변수는 객체가 살아있는 동안 데이터가 유지된다.
     #storageName; //전역변수(속성), #이 붙으면 private(비공개) 외부에서 접근할 수 없는 속성 
     #lastId;
 
@@ -35,6 +36,7 @@ export class StorageService {
     // 신규 항목 추가 p.162
     addItem(item) {
         const storageData = this.#getStorageData();
+        item.id = this.#lastId;
         storageData[this.#lastId++] = item;
         this.#saveStorageData(storageData);
     }
