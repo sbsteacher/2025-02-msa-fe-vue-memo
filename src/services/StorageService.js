@@ -44,5 +44,10 @@ export class StorageService {
         return this.#getStorageData();
     }
     
+    getItem(id) {
+        //return this.#getStorageData()[id];
+        const storageData = this.#getStorageData();
+        return storageData[id]; //item객체가 리턴된다. 
+    }
     
 }
