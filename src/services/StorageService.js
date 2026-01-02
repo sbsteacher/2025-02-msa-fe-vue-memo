@@ -8,7 +8,7 @@
 class StorageService {
     //전역 변수는 객체가 살아있는 동안 데이터가 유지된다.
     #storageName; //전역변수(속성), #이 붙으면 private(비공개) 외부에서 접근할 수 없는 속성 
-    #lastId;
+    #lastId;    
 
     //생성자, 객체를 생성하려면 꼭 생성자를 호출해야 합니다. 
     //메소드지만 특별하다. 객체 생성(객체화)할 때만 호출할 수 있다.
@@ -35,9 +35,11 @@ class StorageService {
 
     // 신규 항목 추가 p.162
     addItem(item) {
-        const storageData = this.#getStorageData();
-        item.id = this.#lastId;
-        storageData[this.#lastId++] = item;
+        console.log(item);
+        // item = { title: '1', content: '1 내용' }
+        const storageData = this.#getStorageData(); //기존에 저장된 데이터 가져와(최초 빈 객체가 넘어온다.) {}
+        item.id = this.#lastId; // item = { id: 1, title: '1', content: '1 내용' }
+        storageData[this.#lastId++] = item; //{}  >>  { '1': { id: 1, title: '1', content: '1 내용' } }
         this.#saveStorageData(storageData);
     }
 
@@ -50,6 +52,12 @@ class StorageService {
         //return this.#getStorageData()[id];
         const storageData = this.#getStorageData();
         return storageData[id]; //item객체가 리턴된다. 
+    }
+
+    delItem(id) { //특정한 메모글을 삭제하기 위해 id값을 파라미터로 받는다.
+        const storageData = this.#getStorageData();
+        delete storageData[id];
+        this.#saveStorageData(storageData);
     }
     
 }
