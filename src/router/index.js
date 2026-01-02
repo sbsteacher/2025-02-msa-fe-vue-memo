@@ -13,6 +13,10 @@ const router = createRouter({
     {
       path: '/memos/add',
       component: Form
+    },   
+    {
+      path: '/memos/:id', //path variable (경로 변수)
+      component: Form
     }
   ],
 })

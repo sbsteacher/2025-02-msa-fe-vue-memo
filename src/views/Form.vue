@@ -1,9 +1,11 @@
 <script setup>
-import { reactive } from 'vue';
+import { reactive, onMounted } from 'vue';
 import storageService  from '@/services/StorageService';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
-const router = useRouter(); //라우터 객체 주소값 얻기
+const router = useRouter(); //라우터 객체 주소값 얻기(주소값 이동)
+const route = useRoute(); //라우트 객체 주소값 얻기(PathVariable 값 가져오기)
+
 const state = reactive({
     memo: {        
         title: '',
@@ -18,6 +20,14 @@ const submit = () => {
         path: '/'
     });
 }
+
+onMounted(() => {
+    console.log('route.params.id:', route.params.id);
+    if(route.params.id) {
+        const id = Number(route.params.id);
+        state.memo = storageService.getItem(id);
+    }
+})
 </script>
 
 <template>
