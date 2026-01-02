@@ -14,7 +14,7 @@
         </header>
 
         <main>
-            <router-view />
+            <router-view></router-view>
         </main>
 
         <footer class="pt-4 mt-4 border-top">

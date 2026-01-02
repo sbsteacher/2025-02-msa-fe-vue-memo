@@ -5,7 +5,7 @@
     붕어빵틀 vs 붕어빵
 */
 //#: 은닉화, 캡슐화
-export class StorageService {
+class StorageService {
     //전역 변수는 객체가 살아있는 동안 데이터가 유지된다.
     #storageName; //전역변수(속성), #이 붙으면 private(비공개) 외부에서 접근할 수 없는 속성 
     #lastId;
@@ -53,3 +53,9 @@ export class StorageService {
     }
     
 }
+
+//StorageService 클래스 내에 있는 생성자 호출!!
+//생성자 호출시에는 new 키워드가 앞에 있어야 한다.
+//객체가 하나만 만들어질 수 있도록 변경
+const storageService = new StorageService('myMemo'); 
+export default storageService;

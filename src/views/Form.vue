@@ -1,9 +1,8 @@
 <script setup>
 import { reactive } from 'vue';
-import { StorageService } from '@/services/StorageService';
+import storageService  from '@/services/StorageService';
 import { useRouter } from 'vue-router';
 
-const storageService = new StorageService('myMemo');
 const router = useRouter(); //라우터 객체 주소값 얻기
 const state = reactive({
     memo: {        
