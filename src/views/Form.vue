@@ -13,8 +13,15 @@ const state = reactive({
     }
 });
 const submit = () => {
-    storageService.addItem(state.memo);
-    alert('저장하였습니다.');
+
+    if(route.params.id) {
+        storageService.setItem(state.memo);
+        alert('수정하였습니다.');
+    } else {
+        storageService.addItem(state.memo);
+        alert('저장하였습니다.');
+    }
+
     //라우팅 처리 (path: '/')로 주소값 이동 (화면 전환)
     router.push({
         path: '/'
@@ -23,7 +30,7 @@ const submit = () => {
 
 onMounted(() => {
     console.log('route.params.id:', route.params.id);
-    if(route.params.id) {
+    if(route.params.id) {        
         const id = Number(route.params.id);
         state.memo = storageService.getItem(id);
     }
@@ -40,7 +47,7 @@ onMounted(() => {
         <label for="content" class="form-label">내용</label>
         <textarea id="content" v-model="state.memo.content"></textarea>
     </div>
-    <button class="btn btn-primary w-100 py-3">저장</button>
+    <button class="btn btn-primary w-100 py-3">{{ route.params.id ? '수정' : '저장' }}</button>
 </form>
 </template>
 

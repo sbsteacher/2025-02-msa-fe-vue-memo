@@ -16,7 +16,6 @@ const remove = id => {
   storageService.delItem(id);
   state.memo = storageService.getItems();
 }
-
 </script>
 
 <template>

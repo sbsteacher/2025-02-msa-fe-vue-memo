@@ -25,7 +25,7 @@ class StorageService {
         return {
             data: {},
             lastId: 1
-        }; //빈 객체 리턴
+        }; //초기화 객체 리턴
     }
 
     // 스토리지 데이터 저장 p.161
@@ -38,15 +38,26 @@ class StorageService {
     addItem(item) {
         console.log(item);
         // item = { title: '1', content: '1 내용' }
+        /*
+        {
+            data: {
+                '1': { id: 1, title: '1', content: '1 내용' },
+                '2': { id: 2, title: '어쩌고저쩌고', content: '저쩌고저쩌고' }
+            },
+            lastId: 3
+        }
+        */
         const storageData = this.#getStorageData(); //기존에 저장된 데이터 가져와(최초 빈 객체가 넘어온다.) {}
-        item.id = storageData.lastId; // item = { id: 1, title: '1', content: '1 내용' }
+        item.id = storageData.lastId; // item = { id: 2, title: '어쩌고저쩌고', content: '저쩌고저쩌고' }
         storageData.data[storageData.lastId++] = item; //{}  >>  { '1': { id: 1, title: '1', content: '1 내용' } }
         this.#saveStorageData(storageData);
     }
 
     // 전체 항목 조회
     getItems() {
-        return this.#getStorageData().data;
+        const savedData = this.#getStorageData();
+        return savedData.data;
+        //return this.#getStorageData().data;        
     }
     
     getItem(id) {
@@ -58,6 +69,12 @@ class StorageService {
     delItem(id) { //특정한 메모글을 삭제하기 위해 id값을 파라미터로 받는다.
         const storageData = this.#getStorageData();
         delete storageData.data[id];
+        this.#saveStorageData(storageData);
+    }
+
+    setItem(item) {
+        const storageData = this.#getStorageData();
+        storageData.data[item.id] = item; //똑같은 속성에 저장하면 된다.
         this.#saveStorageData(storageData);
     }
     
